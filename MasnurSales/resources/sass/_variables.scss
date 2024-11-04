@@ -5,3 +5,190 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+//center header text
+.centered-text{
+text-align: center; 
+}
+
+.centered-header{
+  text-align: center; 
+  padding: 38px;
+  font-size: 60px;
+  color:	#00B4DB;
+  font-weight: bold;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header {
+  width: 120px; /* Adjust as needed */
+}
+
+.text-input {
+  flex: 1;
+}
+
+.table-container {
+  padding-top: 50px; /* Add padding to the top */
+  display: flex;
+  justify-content: center;
+}
+
+.centered-table {
+
+  padding: 20px;
+}
+
+.centered-table th {
+  border-bottom: 1px solid #000; /* Add border to the bottom of column headers */
+  padding: 20px;
+  justify-content: center;
+  text-align: center;
+}  
+
+.centered-table td {
+  border-bottom: 1px solid #ccc; /* Add border to the bottom of data cells */
+  padding: 20px;
+}
+
+
+.subscription-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+    
+    .subscription-card {
+      width: 300px;
+      background-color: #f4f4f4;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-right: 20px;
+    }
+    
+    .subscription-card-title {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .subscription-card-price {
+      font-size: 36px;
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .subscription-card-description {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .subscription-card-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: blue;
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    .subscription-card-button:hover {
+      background-color: #0066cc;
+    }
+
+    .subscription-body{
+      background-color: #00B4DB;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+.about-p{
+  text-align: center;
+  font-size: 25px;
+}
+
+.contact-map{
+  position:relative; 
+  left:800px; 
+  top:2px;
+}
+
+.contact-content{
+  position:relative; 
+  left: 200px; 
+  top:-350px; 
+  font-size: 20px
+}
+
+.subscription-centered-header{
+  text-align: center; 
+  padding: 38px;
+  font-size: 60px;
+  color: white;
+  font-family: var(--bs-body-font-family);
+  font-weight: var(--bs-body-font-weight);
+}
+
+
+
+.profile {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.name {
+  text-align: center;
+  margin: 0;
+}
+
+.bio {
+  text-align: center;
+  color: #888;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.contact-list li {
+  margin-bottom: 10px;
+}
+
+.contact-label {
+  font-weight: bold;
+}
