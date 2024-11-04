@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->date('date');
-            $table->string('sku');
-            $table->string('product_name');
-            $table->decimal('price');
-            $table->decimal('cost');
-            $table->decimal('total_transaction_sales');
-            $table->integer('total_orders');
-            $table->decimal('total_fulfillment_fees');
-
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamps();
-        });
+Schema::create('transactions', function (Blueprint $table) {
+    $table->id();
+    $table->date('date');
+    $table->string('sku');
+    $table->string('product_name');
+    $table->decimal('price', 10, 2);
+    $table->decimal('cost', 10, 2);
+    $table->decimal('total_transaction_sales', 10, 2);
+    $table->integer('total_orders');
+    $table->decimal('total_fulfillment_fees', 10, 2);
+    $table->timestamps();
+});
     }
 
     /**
