@@ -25,6 +25,14 @@ Schema::create('transactions', function (Blueprint $table) {
 });
     }
 
+    public function products()
+{
+    return $this->belongsToMany(Product::class, 'product_transaction')
+                ->withPivot('quantity', 'price', 'total_price')
+                ->withTimestamps();
+}
+
+
     /**
      * Reverse the migrations.
      */

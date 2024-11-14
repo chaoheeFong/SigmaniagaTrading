@@ -1,91 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-
-<style>
-    tr:hover {
-        background-color: #F8FAFD;
-    }
-</style>
-
-<body>
 <div class="container">
-    <div class="row justify-content-center">
+    <h1>Masnur Sales Analysis</h1>
 
-        <div class="header">
-            <div class="centered-header">Masnur Sales Analysis</div>
-        </div>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-        <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-header centered-text">Search Date</div>
-                <div class="card-body">
-                    <form action="{{ route('transactions.index') }}" method="GET">
-                        @csrf
-                        <div class="body-header">
-                            <div class="item">
-                                <label class="header">Date</label>
-                                <input type="date" id="terminated_date" name="terminated_date" class="form-control" required placeholder="Select date">
-                                @error('terminated_date')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="centered-text mt-2">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>            
-            </div>
+    <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('transactions.create') }}'">
+            Add Transaction
+        </button>
 
-            <div class="d-flex justify-content-end mb-2">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" onclick="window.location.href='/transactions/create'">
-                    Add Transaction
-                </button>
-            </div>
+        <!-- Button to navigate to the monthly sales analysis page -->
+        <button type="button" class="btn btn-info ml-2" onclick="window.location.href='{{ route('transactions.monthly') }}'">
+            View Monthly Sales
+        </button>
+    </div>
 
-            <div class="table-container">
-                <table id="on-going-transaction-table" class="table table-hover centered-table">
-                    <thead>
-                        <tr>
-                            <th colspan="7" style="background-color:#DAF5FF">Masnur Sales Analysis</th>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#B0DAFF">Date</th>
-                            <th style="background-color:#B0DAFF">Product Name</th>
-                            <th style="background-color:#B0DAFF">Product SKU</th>
-                            <th style="background-color:#B0DAFF">Product Price</th>
-                            <th style="background-color:#B0DAFF">Product Cost</th>
-                            <th style="background-color:#B0DAFF">Sales Count</th>
-                            <th style="background-color:#B0DAFF">Total Sales</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($transactions as $transaction) <!-- Loop through the transactions -->
-                            <tr>
-                                <td>{{ $transaction->date }}</td>
-                                <td>{{ $transaction->product_name }}</td>
-                                <td>{{ $transaction->product_sku }}</td>
-                                <td>${{ number_format($transaction->product_price, 2) }}</td>
-                                <td>${{ number_format($transaction->product_cost, 2) }}</td>
-                                <td>{{ $transaction->sales_count }}</td>
-                                <td>${{ number_format($transaction->total_sales, 2) }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Product Name</th>
+                    <th>Product SKU</th>
+                    <th>Product Price</th>
+                    <th>Total Sales</th>
+                    <th>Actions</th> <!-- Column for Actions (Edit/Delete) -->
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($transactions as $transaction)
+                    <tr>
+                        <td>{{ $transaction->id }}</td> <!-- Displaying the Transaction ID -->
+                        <td>{{ $transaction->date }}</td>
+                        <td>{{ $transaction->product_name }}</td>
+                        <td>{{ $transaction->sku }}</td>
+                        <td>${{ number_format($transaction->price, 2) }}</td>
+                        <td>${{ number_format($transaction->total_transaction_sales, 2) }}</td>
+                        <td>
+                            <!-- Edit button -->
+                            <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <!-- Delete button -->
+                            <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this transaction?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7">No transactions found.</td> <!-- Adjusted colspan to 7 -->
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
 @endsection

@@ -28,9 +28,28 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [ManageTransactionController::class, 'index'])->name('transactions.index');
-    Route::post('/createTransaction', [ManageTransactionController::class, 'createTransaction'])->name('createTransaction');
+    // Route to view all transactions
+    Route::get('/transactions', [ManageTransactionController::class, 'index'])->name('transactions.index');
+    
+    // Route to show the create form
+    Route::get('/transactions/create', [ManageTransactionController::class, 'create'])->name('transactions.create');
+    
+    // Route to store the new transaction
+    Route::post('/transactions', [ManageTransactionController::class, 'store'])->name('transactions.store');
+    
+    // Route to view monthly sales
+    Route::get('/transactions/monthly', [ManageTransactionController::class, 'showMonthlyTransactions'])->name('transactions.monthly');
+    
+    // Route to show the edit form for a transaction
+    Route::get('/transactions/{transaction}/edit', [ManageTransactionController::class, 'edit'])->name('transactions.edit');
+    
+    // Route to update the transaction
+    Route::put('/transactions/{transaction}', [ManageTransactionController::class, 'update'])->name('transactions.update');
+    
+    // Route to delete a transaction
+    Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 });
+
 
 
 Route::resource('transactions', ManageTransactionController::class);

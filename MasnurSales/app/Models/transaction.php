@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class transaction extends Model
 {
 
-    protected $fillable = [
+     protected $fillable = [
         'date', 
         'sku', 
         'product_name', 
@@ -19,5 +19,10 @@ class transaction extends Model
         'total_fulfillment_fees'
     ];
 
-    use HasFactory;
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)
+                    ->withPivot('quantity', 'price', 'cost', 'total_price')
+                    ->withTimestamps();
+    }
 }
